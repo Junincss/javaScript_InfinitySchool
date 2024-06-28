@@ -57,3 +57,15 @@ div.container {
 
   background: #b6b2b2;
 }
+
+
+.whitebackg{
+  background-color: #fafafa;
+  border-top-left-radius:  4px;
+  border-bottom-left-radius:  4px;
+  border:none;
+}
+
+#exibicao {
+  transition: transform 3.9s ease-in-out;
+}
