@@ -11,87 +11,74 @@ e sair do programa.
 
 Aqui estão os requisitos do programa:
 
-*/
-let saldo = 1000;
-let deposito = 0;
-let operar = true;
-async function exibirbanking() {
+*/let saldo = 1000;
+
+function exibirbanking() {
   const valueoption = parseInt(document.getElementById("optionselected").value);
   const exibir = document.getElementById("exibicao");
+  const operacao = document.getElementById("operacao");
 
-  do {
-    switch (valueoption) {
-      case 1:
-        exibir.innerText = `Seu saldo atual é igual a:
-         R$${saldo.toFixed(2)}`;
-        // alert(`Seu saldo atual é igual a R$${saldo.toFixed(2)}`);
-        valueoption = "";
-        setTimeout((exibir.innerText = ""), 1000);
+  switch (valueoption) {
+    case 1:
+      exibir.innerText = `Seu saldo atual é de: R$${saldo.toFixed(2)}`;
+      break;
 
-        break;
+    case 2:
+      exibir.innerText = `Seu saldo atual é de: R$${saldo.toFixed(2)}`;
+      operacao.innerHTML = `
+        <div class="input-group ">
+          <div class="input-group-prepend whitebackg">
+            <label class="input-group-text  bg-info" for="valorsaque">$</label>
+          </div>
+          <input name="valorsaque" id="valorsaque" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+          <div class="input-group-append d-flex flex-column">
+            <button class="btn btn-outline-info mx-2 " id="bsaque" type="button">Sacar</button>
+          </div>
+        </div>`;
 
-      //condição quebrada
-      case 2:
-        let saque = parseFloat(prompt(`Informe o valor que você quer sacar:`));
-
-        // Verifica se o valor do saque é válido
-        if (!isNaN(saque) && saque > 0 && saldo >= saque) {
-          saldo -= saque;
-          // Atualiza a exibição do saldo
-          exibir.innerText = `Você sacou R$${saque.toFixed(
-            2
-          )}\nSeu saldo atual é igual a: R$${saldo.toFixed(2)}`;
+      document.getElementById("bsaque").addEventListener('click', () => {
+        const valorsaque = parseFloat(document.getElementById('valorsaque').value);
+        if (!isNaN(valorsaque) && valorsaque > 0 && saldo >= valorsaque) {
+          saldo -= valorsaque;
+          exibir.innerText = `Você sacou R$${valorsaque.toFixed(2)}\nSeu saldo atual é igual a: R$${saldo.toFixed(2)}`;
         } else {
-          exibir.innerText =
-            "Você não tem saldo suficiente ou inseriu um valor inválido.";
+          exibir.innerText = "Você não tem saldo suficiente ou inseriu um valor inválido.";
         }
-        break;
+      });
+      break;
 
-      case 3:
-        deposito = parseFloat(
-          prompt(`
-                Seu saldo atual: ${saldo.toFixed(2)}
-  
-                Infome o valor que você quer depositar:`)
-        );
+    case 3:
+      exibir.innerText = `Seu saldo atual é de: R$${saldo.toFixed(2)}`;
+      operacao.innerHTML = `
+        <div class="input-group ">
+          <div class="input-group-prepend whitebackg">
+            <label class="input-group-text  bg-info" for="valordeposito">$</label>
+          </div>
+          <input name="valordeposito" id="valordeposito" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+          <div class="input-group-append d-flex flex-column">
+            <button class="btn btn-outline-info mx-2 " id="bdeposito" type="button">Depositar</button>
+          </div>
+        </div>`;
 
-        if (!isNaN(deposito) && deposito <= 0) {
-          exibir.innerText = `Não é possível operar com letras ou com valor negativo`;
-          //   alert("Não é possível operar com letras ou com valor negativo");
-          valueoption = "";
-          ex;
-          break;
+      document.getElementById("bdeposito").addEventListener('click', () => {
+        const valordeposito = parseFloat(document.getElementById('valordeposito').value);
+        if (!isNaN(valordeposito) && valordeposito > 0) {
+          saldo += valordeposito;
+          exibir.innerText = `Você depositou R$${valordeposito.toFixed(2)}\nSeu novo saldo é R$${saldo.toFixed(2)}`;
         } else {
-          saldo += deposito;
-          exibir.innerText = `Você depositou R$ ${deposito.toFixed(2)}
-    
-            Seu novo saldo é R$${saldo.toFixed(2)}
-
-            `;
-
-          //   alert(`Você depositou R$ ${deposito.toFixed(2)}
-
-          //                 Seu novo saldo é $ ${saldo.toFixed(2)}
-
-          //             `);
+          exibir.innerText = "Você inseriu um valor inválido.";
         }
-        valueoption = "";
-        break;
-      case 4:
-        exibir.innerText = `Obrigado por utilizar nossos serviços:
-                  Abraços - InfinityBrank
-                `;
-        saldo = 1000;
-        operar = false;
-        valueoption = "";
-        break;
-        exibir.innerText = "";
+      });
+      break;
 
-      //   default:
-      //     alert("Operação Invalida tente novamente.");
-      //     break;
-    }
-  } while (operar === true);
+    case 4:
+      exibir.innerText = `Obrigado por utilizar nossos serviços:\nAbraços - InfinityBank`;
+      operacao.innerHTML = '';
+      saldo = 1000;
+      break;
+
+    default:
+      exibir.innerText = "Operação inválida. Tente novamente.";
+      break;
+  }
 }
-
-// const user = prompt("Infome seu nome:");
