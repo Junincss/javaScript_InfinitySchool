@@ -11,20 +11,21 @@ e sair do programa.
 
 Aqui estão os requisitos do programa:
 
-*/let saldo = 1000;
+*let saldo = 1000;
 
 function exibirbanking() {
   const valueoption = parseInt(document.getElementById("optionselected").value);
   const exibir = document.getElementById("exibicao");
   const operacao = document.getElementById("operacao");
-
+  const exibirsaldo = exibir.innerText = `Seu saldo atual é de: R$${saldo.toFixed(2).replace(".",",")}`;
   switch (valueoption) {
+    
     case 1:
-      exibir.innerText = `Seu saldo atual é de: R$${saldo.toFixed(2)}`;
+      exibirsaldo
       break;
 
     case 2:
-      exibir.innerText = `Seu saldo atual é de: R$${saldo.toFixed(2)}`;
+      exibirsaldo
       operacao.innerHTML = `
         <div class="input-group ">
           <div class="input-group-prepend whitebackg">
@@ -48,7 +49,7 @@ function exibirbanking() {
       break;
 
     case 3:
-      exibir.innerText = `Seu saldo atual é de: R$${saldo.toFixed(2)}`;
+      exibirsaldo
       operacao.innerHTML = `
         <div class="input-group ">
           <div class="input-group-prepend whitebackg">
